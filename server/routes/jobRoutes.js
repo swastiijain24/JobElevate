@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const Job = require('../models/Job');
 const authMiddleware = require('../middleware/authMiddleware');
-
+const { getJobById} = require('../controllers/jobController');
+router.get('/:id', getJobById);
 // POST /api/jobs - Add new job (recruiter only)
 router.post('/', authMiddleware, async (req, res) => { //middleware ensures only loggedin users can access it
     try {
@@ -32,4 +33,6 @@ router.get('/', async (req,res)=>{
         res.status(500).json({msg: 'server error'});
     }
 });
+
+
 module.exports = router;

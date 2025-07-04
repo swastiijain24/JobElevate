@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+
 
 const JobList = () => {
     const [jobs, setJobs] = useState([]);
@@ -34,14 +36,16 @@ const JobList = () => {
         <p>No jobs found.</p>
       ) : (
         jobs.map((job) => (
-          <div key={job._id} style={{ border: '1px solid #ccc', marginBottom: '20px', padding: '15px', borderRadius: '8px' }}>
-            <h3>{job.title}</h3>
-            <p><strong>Company:</strong> {job.company}</p>
-            <p><strong>Location:</strong> {job.location}</p>
-            <p><strong>Type:</strong> {job.type}</p>
-            <p><strong>Description:</strong> {job.description}</p>
-            <p><strong>Skills:</strong> {job.skills.join(', ')}</p>
-          </div>
+          <Link key={job._id} to={`/jobs/${job._id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+    <div style={{ border: '1px solid #ccc', marginBottom: '20px', padding: '15px', borderRadius: '8px' }}>
+      <h3>{job.title}</h3>
+      <p><strong>Company:</strong> {job.company}</p>
+      <p><strong>Location:</strong> {job.location}</p>
+      <p><strong>Type:</strong> {job.type}</p>
+      <p><strong>Description:</strong> {job.description}</p>
+      <p><strong>Skills:</strong> {job.skills.join(', ')}</p>
+    </div>
+  </Link>
         ))
       )}
     </div>
